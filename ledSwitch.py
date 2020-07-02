@@ -47,7 +47,7 @@ def customShadowCallback_Delta(payload, responseStatus, token):
 def updateDeviceStatus(status):
     # print("=============================")
     # print("Set device status to " + status)
-    if (status == "on"):
+    if (status == "ON"):
         turnLedOn(LED_PIN_NUM)
     else:
         turnLedOff(LED_PIN_NUM)
