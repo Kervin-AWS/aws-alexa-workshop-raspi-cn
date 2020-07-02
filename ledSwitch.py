@@ -27,7 +27,7 @@ def customShadowCallback_Delta(payload, responseStatus, token):
     print(responseStatus)
     print(payload)
     payloadDict = json.loads(payload)
-    print("++++++++++++++++++++++++++++++++++++++++++++++++ Get DELTA data +++++++++++")
+    print("+++++++++++ Get DELTA data +++++++++++")
     desiredStatus = str(payloadDict["state"]["power"])
     print("desired status: " + desiredStatus)
     print("version: " + str(payloadDict["version"]))
@@ -44,13 +44,13 @@ def customShadowCallback_Delta(payload, responseStatus, token):
     print("+++++++++++++++++++++++++++\n")
     
 def updateDeviceStatus(status):
-    print("=============================")
-    print("Set device status to " + status)
+    # print("=============================")
+    # print("Set device status to " + status)
     if (status == "on"):
         turnLedOn(LED_PIN_NUM)
     else:
         turnLedOff(LED_PIN_NUM)
-    print("=============================\n")
+    # print("=============================\n")
 
 def getDeviceStatus():
     return getLedStatus(LED_PIN_NUM)
@@ -63,7 +63,7 @@ def turnLedOff(gpionum):
 
 def getLedStatus(gpionum):
     outputFlag = GPIO.input(gpionum)
-    print("outputFlag is " + str(outputFlag))
+    # print("outputFlag is " + str(outputFlag))
     if outputFlag:
         return "on"
     else:
@@ -72,10 +72,10 @@ def getLedStatus(gpionum):
 def sendCurrentState2AWSIoT():
     #check current status of device
     currentStatus = getDeviceStatus()
-    print("Device current status is " + currentStatus)
-    print("Sending reported status to MQTT...")
+    # print("Device current status is " + currentStatus)
+    # print("Sending reported status to MQTT...")
     jsonPayload = '{"state":{"reported":{"power":"' + currentStatus + '"}}}'
-    print("Payload is: " + jsonPayload + "\n")
+    # print("Payload is: " + jsonPayload + "\n")
     deviceShadowHandler.shadowUpdate(jsonPayload, customShadowCallback_upate, 50)
  
 def customShadowCallback_upate(payload, responseStatus, token):
@@ -93,8 +93,8 @@ def customShadowCallback_upate(payload, responseStatus, token):
         print("Update request " + token + " rejected!")
 
 def customShadowCallback_Get(payload, responseStatus, token):
-    print("responseStatus: " + responseStatus)
-    print("payload: " + payload)
+    # print("responseStatus: " + responseStatus)
+    # print("payload: " + payload)
     payloadDict = json.loads(payload)
     # {"state":{"desired":{"power":37},"delta":{"power":37}},"metadata":{"desired":{"power":{"timestamp":1533888405}}},"version":54
     stateStr = "" 
@@ -116,10 +116,10 @@ def customShadowCallback_Get(payload, responseStatus, token):
     print(stateStr + ", Version: " + str(payloadDict["version"]))
 
 def printDeviceStatus():
-    print("=========================")
+    # print("=========================")
     status = getDeviceStatus()
-    print(" Current status: " + str(status))
-    print("=========================\n\n")
+    # print(" Current status: " + str(status))
+    # print("=========================\n\n")
 
 # Cofigure logging
 logger = logging.getLogger("AWSIoTPythonSDK.core")
