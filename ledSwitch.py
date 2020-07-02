@@ -37,6 +37,7 @@ def customShadowCallback_Delta(payload, responseStatus, token):
     print("Device current status is " + currentStatus)
     #udpate device current status
     if (currentStatus != desiredStatus):
+        print("change status!")
         # update device status as desired
         updateDeviceStatus(desiredStatus)
         # send current status to IoT service
