@@ -130,6 +130,7 @@ formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(messag
 streamHandler.setFormatter(formatter)
 logger.addHandler(streamHandler)
 
+#please enter your IOT EndPoint
 awsiotHost = "ap5awvlyxgllq-ats.iot.cn-northwest-1.amazonaws.com.cn"
 awsiotPort = 8883;
 rootCAPath = "./rootCA.pem"
